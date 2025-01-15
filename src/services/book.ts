@@ -1,7 +1,7 @@
 import { PrismaClient, Book } from "@prisma/client";
 import { NextFunction } from "express";
 import { HttpException } from "../exceptions/HttpException";
-import { GetBook } from "../types/book.type";
+import { GetBook,UpdateBook } from "../types/book.type";
 
 class BookServices {
   public book = new PrismaClient().book;
@@ -20,13 +20,27 @@ class BookServices {
   public async getBook(
     next: NextFunction,
     data: GetBook
-  ): Promise<Book | void | null> {
+  ): Promise<Book | void> {
     try {
       const book: Book | null = await this.book.findUnique({
         where: { id: data.id },
       });
-      return book;
+      if(book) return book;
     } catch (error: any) {
+      next(new HttpException(400, error.message));
+      console.log("error:", error);
+      return;
+    }
+  }
+
+  public async updateBook(next:NextFunction,data:UpdateBook):Promise<Book | void> {
+    try {
+      const updatedBook:Book = await this.book.update({
+        where:{id:data.id},
+        data:data
+      })
+      return updatedBook;
+    } catch (error:any) {
       next(new HttpException(400, error.message));
       console.log("error:", error);
       return;

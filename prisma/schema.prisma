@@ -17,17 +17,20 @@ model User {
   id Int @id @default(autoincrement())
   name String
   books Json? @default("{\"past\": [], \"present\": []}")
-  present_book_id Int?
-  book Book? @relation(fields:[present_book_id],references:[id])
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
+  present_books Book[]
 }
 
 model Book {
   id Int @id @default(autoincrement())
   name String
+  author String?
+  year String?
   score Float @default(-1)
+  status Boolean @default(false)
+  user_id Int?
+  user User? @relation(fields:[user_id],references:[id])
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
-  users User[]
 }
