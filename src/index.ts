@@ -6,6 +6,7 @@ import { ErrorMiddleware } from "./middleware/error";
 import { BookRoute } from "./routers/book";
 import { UserRoute } from "./routers/user";
 import { Routes } from "./interfaces/routes.interface";
+import cors from "cors";
 
 const app = express();
 dotenv.config();
@@ -14,7 +15,14 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const port = 3000;
+const port = 5000;
+
+app.use(
+  cors({
+    credentials:true,
+    origin: ["*","http://localhost:3000"],
+  })
+);
 
 app.get('/',(req,res) => {
     res.send("Hello world");

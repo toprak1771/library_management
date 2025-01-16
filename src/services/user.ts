@@ -27,7 +27,7 @@ class UserServices {
   ): Promise<User | void> {
     try {
       const user: User | null = await this.user.findUnique({
-        where: { id: data.id },
+        where: { id: data.id },include:{present_books:true}
       });
       if (user) return user;
     } catch (error: any) {

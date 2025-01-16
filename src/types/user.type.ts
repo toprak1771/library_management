@@ -3,12 +3,17 @@ export type GetUser = {
 }
 
 export type BookUserName = {
-    name:string
+    name:string,
+    score:number
+}
+
+export type BookUserNamePresent = {
+    name:string,
 }
 
 export type UserBook = {
     past:BookUserName[],
-    present:BookUserName[]
+    present:BookUserNamePresent[]
 }
 
 export type UpdateUser = {
@@ -16,5 +21,5 @@ export type UpdateUser = {
     name?: string,
     books?:any,
     createdAt?:Date,
-    updatedAt?:Date
+    updatedAt?:Date,
 }

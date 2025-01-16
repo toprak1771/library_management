@@ -8,7 +8,11 @@ class BookServices {
 
   public async getAll(next: NextFunction): Promise<Book[] | void> {
     try {
-      const books: Book[] = await this.book.findMany();
+      const books: Book[] = await this.book.findMany({
+        include:{
+          user:true
+        }
+      });
       return books;
     } catch (error: any) {
       next(new HttpException(400, error.message));
@@ -23,7 +27,7 @@ class BookServices {
   ): Promise<Book | void> {
     try {
       const book: Book | null = await this.book.findUnique({
-        where: { id: data.id },
+        where: { id: data.id },include:{user:true}
       });
       if(book) return book;
     } catch (error: any) {

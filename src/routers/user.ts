@@ -16,6 +16,7 @@ export class UserRoute implements Routes {
     private initializeRoutes(){
         this.router.get(`${this.path}`,this._userController.getAll);
         this.router.post(`${this.path}/borrow`,this._userController.borrow);
+        this.router.post(`${this.path}/return`,this._userController.return);
     }
     
 }
