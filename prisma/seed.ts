@@ -85,7 +85,7 @@ async function main() {
         year:'1932',
         createdAt:new Date(),
         updatedAt:new Date(),
-        status:false,
+        status:true,
         user_id:2
     }
   })
