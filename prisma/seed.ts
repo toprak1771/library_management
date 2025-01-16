@@ -57,13 +57,6 @@ async function main() {
     },
   });
 
-  await prisma.user.create({
-    data: {
-      name: 'Enes Faruk Meniz',
-      createdAt: new Date(),
-      updatedAt:new Date(),
-    },
-  });
 
   await prisma.book.create({
     data:{
